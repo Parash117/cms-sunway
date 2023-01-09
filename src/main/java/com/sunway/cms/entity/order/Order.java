@@ -1,0 +1,45 @@
+package com.sunway.cms.entity.order;
+
+import com.sunway.cms.entity.fooditems.FoodItems;
+import com.sunway.cms.entity.students.Students;
+import com.sunway.cms.enums.OrderStatus;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "food_orders")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Order {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", foreignKey = @ForeignKey(name = "FK_ORDER_STUDENT"))
+    private Students students;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "order_food",
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "food_item_id", referencedColumnName = "id")
+    )
+    private List<FoodItems> foodItemsList;
+
+    private Integer orderNumber;
+
+    private Date orderDate;
+
+    private Float totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+}

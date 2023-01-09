@@ -44,4 +44,9 @@ public class FoodItemController extends BaseController {
     public ResponseEntity<?> getByShortName(@PathVariable("shortName") String shortName){
         return new ResponseEntity<>(foodItemService.getByShortName(shortName), HttpStatus.OK);
     }
+
+    @GetMapping("/get-categorized")
+    public ResponseEntity<?> getByShortName(){
+        return new ResponseEntity<>(new ApiResponse("success", true, foodItemService.getActiveFoodItemsByCategory()), HttpStatus.OK);
+    }
 }

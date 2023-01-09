@@ -33,10 +33,9 @@ public class FoodCategory {
     @Column(columnDefinition = "TEXT")
     private String Description;
 
-    /*
     @JsonBackReference
-    @OneToMany(mappedBy = "foodCategory")
-    private List<FoodItems> foodItemsList;*/
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodCategory")
+    private List<FoodItems> foodItemsList;
 
     public FoodCategory(Integer id){
         this.id = id;

@@ -9,4 +9,9 @@ public class RestApiPaths {
         public static final String FOOD_BY_CATEGORY = FOOD_URL + "/get-by-short-name";
     }
 
+    public static class FoodCategory{
+        public static final String FOOD_CATEGORY_URL = RestApiPaths.BASE_URL + "/food-category";
+        public static final String FOOD_BY_CATEGORY = FOOD_CATEGORY_URL + "/get-by-short-name";
+    }
+
 }

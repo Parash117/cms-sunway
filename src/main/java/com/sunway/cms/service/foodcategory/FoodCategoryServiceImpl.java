@@ -2,12 +2,14 @@ package com.sunway.cms.service.foodcategory;
 
 import com.sunway.cms.dto.foodcategory.FoodCategoryDto;
 import com.sunway.cms.entity.foodcategory.FoodCategory;
+import com.sunway.cms.entity.fooditems.FoodItems;
 import com.sunway.cms.exceptions.ResourceNotFoundException;
 import com.sunway.cms.repo.foodcategory.FoodCategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,10 @@ public class FoodCategoryServiceImpl implements FoodCategoryService{
     @Override
     public FoodCategoryDto createCategory(FoodCategoryDto foodCategoryDto) {
         FoodCategory cat = modelMapper.map(foodCategoryDto,FoodCategory.class);
+        List<FoodItems> foodItemsList = new ArrayList<>();
+
+        cat.setFoodItemsList(foodItemsList);
+
         FoodCategory addedCat = foodCategoryRepo.save(cat);
         return modelMapper.map(addedCat,FoodCategoryDto.class);
     }
@@ -57,6 +63,13 @@ public class FoodCategoryServiceImpl implements FoodCategoryService{
         List<FoodCategoryDto> catDtos = categories.stream().map((cat)->
                 modelMapper.map(cat,FoodCategoryDto.class)).collect(Collectors.toList());
         return catDtos;
+    }
+
+    @Override
+    public List<FoodItems> getFoodItemsByCategory() {
+        FoodCategory foodCategory = foodCategoryRepo.findById(1).get();
+//        return foodCategory.getFoodItemsList();
+        return null;
     }
 
 }

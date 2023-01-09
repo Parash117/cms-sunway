@@ -2,6 +2,7 @@ package com.sunway.cms.service.foodcategory;
 
 import com.sunway.cms.dto.foodcategory.FoodCategoryDto;
 import com.sunway.cms.entity.foodcategory.FoodCategory;
+import com.sunway.cms.entity.fooditems.FoodItems;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface FoodCategoryService {
     FoodCategoryDto getCategory(Integer categoryId);
     // get all
     List<FoodCategoryDto> getAllCategory();
+
+    List<FoodItems> getFoodItemsByCategory();
 }
