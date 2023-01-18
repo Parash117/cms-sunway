@@ -20,11 +20,19 @@ public class FacultyController extends BaseController {
         this.facultyService = facultyService;
     }
 
-    @PostMapping
+    @PostMapping("/session-id/{sessionId}")
     public ResponseEntity<?> create(@RequestBody Faculty faculty){
         faculty = facultyService.create(faculty);
         return ResponseEntity.ok(new ApiResponse<>(
                 messageSource.get("get.all", messageSource.get("categories")), true, faculty
+        ));
+    }
+
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity<?> create(@PathVariable("id") Long id){
+        facultyService.deleteById(id);
+        return ResponseEntity.ok(new ApiResponse<>(
+                messageSource.get("get.all", messageSource.get("categories")), true, null
         ));
     }
 

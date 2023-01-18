@@ -26,9 +26,12 @@ public class Faculty {
     @Column(columnDefinition = "TEXT")
     private String details;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "faculty_id", foreignKey = @ForeignKey(name = "FK_FACULTY_SUBJECTS"))
     private List<Subjects> subjectList;
+
+    @Transient
+    private String sessionId;
 
     public Faculty(Long id) {
         this.id = id;
