@@ -99,5 +99,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders httpHeaders = new HttpHeaders();
         exception.printStackTrace();
         return new ResponseEntity<>(new ApiResponse<>("ORDER SHOULD BE IN A FLOW",false, exception.getMessage()), httpHeaders, HttpStatus.NOT_ACCEPTABLE);
-    }
+    } // --> java basic fundamentals, maven with it's life cycle,  java spring boot basic, spring jpa, database, spring boot folder and file structure, service layer logic, custom exception handeling in REST
+    // debugging and logging, spring trick and tips security, junit testing, advance security with JWT,
 }
