@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +56,14 @@ public class FoodCategoryServiceImpl implements FoodCategoryService{
     public FoodCategoryDto getCategory(Integer categoryId) {
         FoodCategory cat = foodCategoryRepo.findById(categoryId).orElseThrow(()->
                 new ResourceNotFoundException("Category","Category Id",categoryId));
+        try {
+            File file = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator + "somefile.pdf");
+            //file manipulation
+            cat.setName(file.getPath());
+        }
+       catch (Exception exception){
+           System.out.println("file not found");
+       }
         return modelMapper.map(cat,FoodCategoryDto.class);
     }
 

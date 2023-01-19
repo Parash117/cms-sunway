@@ -9,6 +9,7 @@ import com.sunway.cms.entity.order.Order;
 import com.sunway.cms.entity.staff.Staff;
 import com.sunway.cms.entity.students.Students;
 import com.sunway.cms.enums.OrderStatus;
+import com.sunway.cms.exception.OrderFlowException;
 import com.sunway.cms.repo.fooditem.FoodItemRepo;
 import com.sunway.cms.repo.order.OrderParticularRepo;
 import com.sunway.cms.repo.order.OrderRepo;
@@ -81,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
             order = orderRepo.save(order);
             return  new FoodOrderDto(order);
         } else {
-            throw new RuntimeException("order is not in regular process");
+            throw new OrderFlowException("Order should be placed first then only can be cooked");
         }
 
     }
@@ -94,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
             order = orderRepo.save(order);
             return  new FoodOrderDto(order);
         } else {
-            throw new RuntimeException("order is not in regular process");
+            throw new OrderFlowException("order is not in regular process");
         }
     }
 
@@ -107,7 +108,7 @@ public class OrderServiceImpl implements OrderService {
             order = orderRepo.save(order);
             return new FoodOrderDto(order);
         } else {
-            throw new RuntimeException("order is not in regular process");
+            throw new OrderFlowException("order is not in regular process");
         }
     }
 }
